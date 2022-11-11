@@ -1,0 +1,10 @@
+HELP.md
+/server/src/main/**/target/
+/server/src/test/**/target/
+
+### IntelliJ IDEA ###
+/server/.idea
+/server/*.iws
+/server/*.iml
+/server/*.ipr
+
