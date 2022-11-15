@@ -1,6 +1,7 @@
 HELP.md
 /server/src/main/**/target/
 /server/src/test/**/target/
+/server/target/
 
 ### IntelliJ IDEA ###
 /server/.idea
