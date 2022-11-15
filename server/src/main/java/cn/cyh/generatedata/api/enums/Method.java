@@ -8,7 +8,8 @@ public enum Method {
     /**
      * 定义支持的函数
      */
-    SFZH("@sfzh");
+    SFZH("@sfzh"),
+    PATH("@/");
 
     private String value;
     Method(String value) {

@@ -24,6 +24,7 @@ public class GenerateController {
     }
 
     /**
+     * 格式定义如下:
      * {
      *   "sfzh": "@sfzh",
      *
@@ -32,7 +33,7 @@ public class GenerateController {
      *   "number|+1": 202,      //202
      *   "number2|1-100.1-10": 1,   //71.73566
      *   "boolean|1": true,         //false
-     *   "regexp": /[a-z][A-Z][0-9]/,   // qS8
+     *   "regexp|reg": /[a-z][A-Z][0-9]/,   // qS8
      *   "absolutePath": "@/string @/user/name",    //★ demo
      *   "user": {
      *     "name": "demo"
@@ -42,7 +43,6 @@ public class GenerateController {
      *     "320000": "江苏省"
      *   }, // {"310000": "上海市","320000": "江苏省"}
      *   "array|1": [ "AMD" ]   //AMD
-     *
      *
      *   "string|1-2": "@string",   //&b(V
      *   "integer": "@integer(10, 30)", //29
@@ -65,6 +65,8 @@ public class GenerateController {
      *   "cparagraph": "@cparagraph",   //他明林决每别精与界受部因第方。习压直型示多性子主求求际后世
      *   "csentence": "@csentence",     //命己结最方心人车据称温增划眼难。
      *   "range": "@range(2, 10)"   //[2, 3, 4, 5, 6, 7, 8, 9]
+     *
+     *   "sm": "@nullable"
      * }
      * @param map 自定义格式: 支持map
      * @return 生成的随机数据
