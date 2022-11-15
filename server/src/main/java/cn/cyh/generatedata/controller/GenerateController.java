@@ -44,8 +44,8 @@ public class GenerateController {
      *   }, // {"310000": "上海市","320000": "江苏省"}
      *   "array|1": [ "AMD" ]   //AMD
      *
-     *   "string|1-2": "@string",   //&b(V
-     *   "integer": "@integer(10, 30)", //29
+     *   "string|1-2": "@str",   //AKao
+     *   "integer": "@int(10, 30)", //29
      *   "float": "@float(60, 100, 2, 2)",  //65.93
      *   "boolean": "@boolean",     //true
      *   "date": "@date(yyyy-MM-dd)",   //2013-02-05
@@ -65,8 +65,6 @@ public class GenerateController {
      *   "cparagraph": "@cparagraph",   //他明林决每别精与界受部因第方。习压直型示多性子主求求际后世
      *   "csentence": "@csentence",     //命己结最方心人车据称温增划眼难。
      *   "range": "@range(2, 10)"   //[2, 3, 4, 5, 6, 7, 8, 9]
-     *
-     *   "sm": "@nullable"
      * }
      * @param map 自定义格式: 支持map
      * @return 生成的随机数据

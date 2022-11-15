@@ -10,6 +10,7 @@ public enum Rule {
     /**
      * 定义支持的规则
      */
+    NOT_HAS(""),
     NUM_RANGE("/\\d-\\d/"),
     NUM("/\\d/"),
     ONE_MORE("/\\+\\d/"),
