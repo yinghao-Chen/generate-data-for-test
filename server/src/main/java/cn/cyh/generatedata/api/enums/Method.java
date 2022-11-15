@@ -10,7 +10,18 @@ public enum Method {
      */
     SFZH("@sfzh"),
     PATH("@/"),
-    STRING("@str");
+    STRING("@str"),
+    INT("@int"),
+    FLOAT("@float"),
+    BOOLEAN("@boolean"),
+    DATE("@date"),
+    DATETIME("@datetime"),
+    DATE_NOW("@now"),
+    URL("@url"),
+    EMAIL("@email"),
+    SEX("@sex"),
+    CITY("@city"),
+    PROVINCE("@province");
 
     private String value;
     Method(String value) {

@@ -7,7 +7,6 @@ import cn.cyh.generatedata.rereg.exception.UninitializedException;
 import cn.cyh.generatedata.rereg.model.OrdinaryNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -22,11 +21,7 @@ import java.util.Map;
 public class RegexImpl extends Strategy {
 
     @Override
-    protected String explainStr(String rule, Object value) {
-        String v = (String) value;
-        if(!StringUtils.hasText(v)) {
-            return null;
-        }
+    protected Object explainStr(String rule, String v, Map<String, Object> map) {
         try {
             return new OrdinaryNode(v).random();
         } catch (UninitializedException | RegexpIllegalException | TypeNotMatchException e) {

@@ -24,7 +24,7 @@ public class GenerateController {
     }
 
     /**
-     * 格式定义如下:
+     * 格式定义如下: file|#Rule: #Method
      * {
      *   "sfzh": "@sfzh",
      *
@@ -43,7 +43,6 @@ public class GenerateController {
      *     "320000": "江苏省"
      *   }, // {"310000": "上海市","320000": "江苏省"}
      *   "array|1": [ "AMD" ]   //AMD
-     *
      *   "string|1-2": "@str",   //AKao
      *   "integer": "@int(10, 30)", //29
      *   "float": "@float(60, 100, 2, 2)",  //65.93
@@ -53,9 +52,9 @@ public class GenerateController {
      *   "now": "@now",     //2017-08-12 01:16:03
      *   "url": "@url",     //cid://vqdwk.nc/iqffqrjzqa
      *   "email": "@email", //u.ianef@hcmc.bv
-     *   "region": "@region",   //华南
      *   "city": "@city",       //通化市
      *   "province": "@province",   //陕西省
+     *
      *   "county": "@county",   //嵊州市
      *   "upper": "@upper(@title)", //DGWVCCRR TLGZN XSFVHZPF TUJ
      *   "guid": "@guid",   //c09c7F2b-0AEF-B2E8-74ba-E1efC0FecEeA

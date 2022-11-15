@@ -20,7 +20,7 @@ public class RandomDataImpl implements RandomData {
     public Map<String, Object> generate(Map<String, Object> map) {
         Map<String, Object> result = new LinkedHashMap<>(map.size() * 4 / 3 + 1);
         for (Map.Entry<String, Object> entry : map.entrySet()) {
-            GenerateUtil.generate(entry, result);
+            GenerateUtil.generate(entry, result, map);
         }
         return result;
     }

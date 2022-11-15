@@ -3,7 +3,6 @@ package cn.cyh.generatedata.strategy;
 import cn.cyh.generatedata.api.enums.Rule;
 import cn.cyh.generatedata.utils.GenerateUtil;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -17,11 +16,7 @@ import java.util.Map;
 public class FloatImpl extends Strategy {
 
     @Override
-    protected String explainStr(String rule, Object value) {
-        String v = (String) value;
-        if(!StringUtils.hasText(v)) {
-            return null;
-        }
+    protected Object explainStr(String rule, String v, Map<String, Object> map) {
         if(v.startsWith("@")) {
 
         } else {

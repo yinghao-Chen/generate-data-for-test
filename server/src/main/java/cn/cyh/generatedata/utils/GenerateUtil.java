@@ -1,5 +1,6 @@
 package cn.cyh.generatedata.utils;
 
+import cn.cyh.generatedata.api.enums.Method;
 import cn.cyh.generatedata.api.enums.Rule;
 import cn.cyh.generatedata.strategy.Strategy;
 import cn.cyh.generatedata.strategy.StrategyFactory;
@@ -20,7 +21,7 @@ public class GenerateUtil {
 
     public static final Random RANDOM = new Random();
 
-    public static void generate(Map.Entry<String, Object> entry, Map<String, Object> result) {
+    public static void generate(Map.Entry<String, Object> entry, Map<String, Object> result, Map<String, Object> map) {
         if(!StringUtils.hasText(entry.getKey())) {
             return;
         }
@@ -38,8 +39,16 @@ public class GenerateUtil {
             strategy = StrategyFactory.getStrategy(Rule.NOT_HAS);
         } else if(Rule.NUM_RANGE.getValue().matcher(rule).matches()) {
             strategy = StrategyFactory.getStrategy(Rule.NUM_RANGE);
+        } else if(Rule.NUM.getValue().matcher(rule).matches()) {
+            strategy = StrategyFactory.getStrategy(Rule.NUM);
+        } else if(Rule.FLOAT.getValue().matcher(rule).matches()) {
+            strategy = StrategyFactory.getStrategy(Rule.FLOAT);
+        } else if(Rule.ONE_MORE.getValue().matcher(rule).matches()) {
+            strategy = StrategyFactory.getStrategy(Rule.ONE_MORE);
+        } else if(Rule.REGEXP.getValue().matcher(rule).matches()) {
+            strategy = StrategyFactory.getStrategy(Rule.REGEXP);
         }
-        result.put(field, strategy != null ? strategy.explain(null, value) : value);
+        result.put(field, strategy != null ? strategy.explain(null, value, map) : value);
     }
 
     public static Set<Integer> getRandomNum(int max, int num) {
@@ -54,7 +63,19 @@ public class GenerateUtil {
         String[] arr = rule.split("-");
         int min = Integer.parseInt(arr[0]);
         int max = Integer.parseInt(arr[1]);
+        return getNumRandom(min, max);
+    }
+
+    public static int getNumRandom(int min, int max) {
         return RANDOM.nextInt(max) + Math.abs(max-min);
+    }
+
+    public static long getNumRandom(long min, long max) {
+        return RANDOM.nextInt((int) (max - min)) + min;
+    }
+
+    public static int getNumRandom(int num) {
+        return RANDOM.nextInt(num);
     }
 
     public static String getResult(String v, int num) {
@@ -63,6 +84,27 @@ public class GenerateUtil {
             sb.append(v);
         }
         return sb.toString();
+    }
+
+    public static String getResultFormMap(String s, Map<String, Object> map) {
+        String[] paths = s.substring(Method.PATH.getValue().length()).split("/");
+        int i = 0;
+        while (i < paths.length) {
+            String ss = paths[i];
+            Object o = map.get(ss);
+            if(o == null) {
+                return s;
+            }
+            if(o instanceof Map) {
+                map = (Map<String, Object>) o;
+            } else if(o instanceof String) {
+                return (String) o;
+            } else {
+                return s;
+            }
+            i++;
+        }
+        return s;
     }
 
 }
