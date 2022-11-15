@@ -21,7 +21,9 @@ public enum Method {
     EMAIL("@email"),
     SEX("@sex"),
     CITY("@city"),
-    PROVINCE("@province");
+    PROVINCE("@province"),
+    ID("@id"),
+    UUID("@uuid");
 
     private String value;
     Method(String value) {

@@ -6,9 +6,11 @@ import cn.cyh.generatedata.api.enums.Rule;
 import cn.cyh.generatedata.utils.GenerateUtil;
 import cn.cyh.generatedata.utils.RandomStrUtil;
 import cn.cyh.generatedata.utils.SfzhUtil;
+import com.github.Generator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -17,6 +19,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
+import java.util.UUID;
 
 /**
  * @author DELL
@@ -29,6 +32,9 @@ public class NotHasImpl extends Strategy {
 
     private static final String[] CNAME = new String[]{"com", "cn", "org", "top", "net", "cc", "co", "vip", "tech"};
     private static final String[] SEX = new String[]{"男", "女"};
+
+    @Resource
+    private Generator atomicGenerator;
 
     @Override
     protected Object explainStr(String rule, String v, Map<String, Object> map) {
@@ -144,6 +150,10 @@ public class NotHasImpl extends Strategy {
                 return DataCache.CITY_LIST.get(GenerateUtil.getNumRandom(DataCache.CITY_LIST.size()));
             } else if(Method.PROVINCE.getValue().equals(v)) {
                 return DataCache.PROVINCE_LIST.get(GenerateUtil.getNumRandom(DataCache.PROVINCE_LIST.size()));
+            } else if(Method.ID.getValue().equals(v)) {
+                return atomicGenerator.nextId();
+            } else if(Method.UUID.getValue().equals(v)) {
+                return UUID.randomUUID().toString().replace("-", "");
             }
         }
         return v;
