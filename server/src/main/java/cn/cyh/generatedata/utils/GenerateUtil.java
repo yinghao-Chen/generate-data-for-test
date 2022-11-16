@@ -75,7 +75,7 @@ public class GenerateUtil {
     }
 
     public static int getNumRandom(int num) {
-        return RANDOM.nextInt(num);
+        return num == 0 ? 0 : RANDOM.nextInt(num);
     }
 
     public static String getResult(String v, int num) {

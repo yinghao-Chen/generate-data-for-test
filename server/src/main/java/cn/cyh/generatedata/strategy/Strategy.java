@@ -13,13 +13,13 @@ public abstract class Strategy {
 
     public Object explain(String rule, Object value, Map<String, Object> map) {
         if(value instanceof String) {
-            explainStrBlank(rule, value, map);
+            return explainStrBlank(rule, value, map);
         }else if(value instanceof Map) {
-            explainMap(rule, value);
+            return explainMap(rule, value);
         } else if (value instanceof List) {
-            explainArray(rule, value);
+            return explainArray(rule, value);
         } else if (value instanceof Boolean) {
-            explainBoolean(rule, value);
+            return explainBoolean(rule, value);
         }
         return value;
     }

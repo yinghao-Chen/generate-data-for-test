@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,12 +15,14 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * @author cyh
  * @date 2022/11/15
  */
 @Slf4j
+@Component
 public class InitCityData implements CommandLineRunner, DisposableBean {
 
     @Override
@@ -34,7 +37,7 @@ public class InitCityData implements CommandLineRunner, DisposableBean {
                 sb.append((char)value);
             }
             String[] lines = sb.toString().split(Constant.LINE_SPLIT);
-            DataCache.CITY_LIST.addAll(Arrays.asList(lines));
+            DataCache.CITY_LIST.addAll(Arrays.stream(lines).map(String::trim).collect(Collectors.toList()));
         }catch (IOException e) {
             log.error("InitCityData error:{}", e.getMessage());
         }
