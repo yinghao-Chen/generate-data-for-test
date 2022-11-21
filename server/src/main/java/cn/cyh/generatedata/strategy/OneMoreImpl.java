@@ -16,7 +16,7 @@ import java.util.Map;
 public class OneMoreImpl extends Strategy {
 
     @Override
-    protected Object explainStr(String rule, String v, Map<String, Object> map) {
+    protected Object explainStr(String rule, String v, Map<String, Object> map, boolean[] duResult) {
         if(v.startsWith("@")) {
 
         } else {

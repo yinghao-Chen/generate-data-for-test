@@ -11,10 +11,13 @@ import java.util.Map;
  */
 public abstract class Strategy {
 
-    public Object explain(String rule, Object value, Map<String, Object> map) {
+    public Object explain(String rule, Object value, Map<String, Object> map, boolean[] duResult) {
         if(value instanceof String) {
-            return explainStrBlank(rule, value, map);
-        }else if(value instanceof Map) {
+            return explainStrBlank(rule, value, map, duResult);
+        } else if (value instanceof Integer || value instanceof Long
+                || value instanceof Double || value instanceof Float) {
+            return explainStrBlank(rule, String.valueOf(value), map, duResult);
+        } else if(value instanceof Map) {
             return explainMap(rule, value);
         } else if (value instanceof List) {
             return explainArray(rule, value);
@@ -24,12 +27,12 @@ public abstract class Strategy {
         return value;
     }
 
-    private Object explainStrBlank(String rule, Object value, Map<String, Object> map) {
+    private Object explainStrBlank(String rule, Object value, Map<String, Object> map, boolean[] duResult) {
         String v = (String) value;
         if(!StringUtils.hasText(v)) {
             return null;
         }
-        return explainStr(rule, v, map);
+        return explainStr(rule, v, map, duResult);
     }
 
     /**
@@ -38,7 +41,7 @@ public abstract class Strategy {
      * @param value 值
      * @return v
      */
-    protected abstract Object explainStr(String rule, String value, Map<String, Object> map);
+    protected abstract Object explainStr(String rule, String value, Map<String, Object> map, boolean[] duResult);
 
     /**
      * 键值对解析

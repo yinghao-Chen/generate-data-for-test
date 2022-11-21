@@ -19,7 +19,7 @@ import java.util.Set;
 public class NumImpl extends Strategy {
 
     @Override
-    protected Object explainStr(String rule, String v, Map<String, Object> map) {
+    protected Object explainStr(String rule, String v, Map<String, Object> map, boolean[] duResult) {
         if(v.startsWith("@")) {
 
         } else {

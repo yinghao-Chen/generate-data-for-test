@@ -21,7 +21,8 @@ public class GenerateUtil {
 
     public static final Random RANDOM = new Random();
 
-    public static void generate(Map.Entry<String, Object> entry, Map<String, Object> result, Map<String, Object> map) {
+    public static void generate(Map.Entry<String, Object> entry, Map<String, Object> result, Map<String, Object> map,
+                                boolean[] duResult) {
         if(!StringUtils.hasText(entry.getKey())) {
             return;
         }
@@ -48,7 +49,7 @@ public class GenerateUtil {
         } else if(Rule.REGEXP.getValue().matcher(rule).matches()) {
             strategy = StrategyFactory.getStrategy(Rule.REGEXP);
         }
-        result.put(field, strategy != null ? strategy.explain(null, value, map) : value);
+        result.put(field, strategy != null ? strategy.explain(rule, value, map, duResult) : value);
     }
 
     public static Set<Integer> getRandomNum(int max, int num) {
@@ -67,11 +68,11 @@ public class GenerateUtil {
     }
 
     public static int getNumRandom(int min, int max) {
-        return RANDOM.nextInt(max) + Math.abs(max-min);
+        return RANDOM.nextInt(max-min) + min + 1;
     }
 
     public static long getNumRandom(long min, long max) {
-        return RANDOM.nextInt((int) (max - min)) + min;
+        return RANDOM.nextInt((int) (max - min)) + min + 1;
     }
 
     public static int getNumRandom(int num) {
@@ -87,13 +88,22 @@ public class GenerateUtil {
     }
 
     public static String getResultFormMap(String s, Map<String, Object> map) {
-        String[] paths = s.substring(Method.PATH.getValue().length()).split("/");
+        String s1 = s.substring(Method.PATH.getValue().length());
+        String[] paths = s1.split(":");
         int i = 0;
         while (i < paths.length) {
             String ss = paths[i];
             Object o = map.get(ss);
             if(o == null) {
-                return s;
+                for (Map.Entry<String, Object> entry : map.entrySet()) {
+                    if(entry.getKey().startsWith(ss + "|")) {
+                        o = entry.getValue();
+                        break;
+                    }
+                }
+                if(o == null) {
+                    return s;
+                }
             }
             if(o instanceof Map) {
                 map = (Map<String, Object>) o;

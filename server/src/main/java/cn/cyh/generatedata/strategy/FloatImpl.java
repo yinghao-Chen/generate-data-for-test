@@ -16,13 +16,13 @@ import java.util.Map;
 public class FloatImpl extends Strategy {
 
     @Override
-    protected Object explainStr(String rule, String v, Map<String, Object> map) {
+    protected Object explainStr(String rule, String v, Map<String, Object> map, boolean[] duResult) {
         if(v.startsWith("@")) {
 
         } else {
             String[] ol = rule.split("\\.");
-            return (ol[0].contains("-") ? GenerateUtil.getResult(v, GenerateUtil.getNumRange(ol[0])) : ol[0])
-                    + "." + (ol[1].contains("-") ? GenerateUtil.getResult(v, GenerateUtil.getNumRange(ol[1])) : ol[1]);
+            return (ol[0].contains("-") ? GenerateUtil.getNumRange(ol[0]) : ol[0])
+                    + "." + (ol[1].contains("-") ? GenerateUtil.getNumRange(ol[1]) : ol[1]);
         }
         return v;
     }

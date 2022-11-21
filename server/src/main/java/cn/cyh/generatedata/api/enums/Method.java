@@ -9,7 +9,7 @@ public enum Method {
      * 定义支持的函数
      */
     SFZH("@sfzh"),
-    PATH("@/"),
+    PATH("@:"),
     STRING("@str"),
     INT("@int"),
     FLOAT("@float"),
@@ -22,6 +22,8 @@ public enum Method {
     SEX("@sex"),
     CITY("@city"),
     PROVINCE("@province"),
+    COUNTRY("@country"),
+    COUNTRY_EN("@country_en"),
     ID("@id"),
     UUID("@uuid");
 

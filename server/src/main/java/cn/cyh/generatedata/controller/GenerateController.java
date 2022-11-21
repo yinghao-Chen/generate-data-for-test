@@ -56,6 +56,8 @@ public class GenerateController {
      *   "email": "@email", //u.ianef@hcmc.bv
      *   "city": "@city",       //通化市
      *   "province": "@province",   //陕西省
+     *   "country": "@country",   //中国
+     *   "country": "@country_en",   //china
      *   "id": "@id",       //650000201405028485
      *   "id": "@uuid"
      * }
