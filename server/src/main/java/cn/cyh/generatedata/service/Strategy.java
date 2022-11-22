@@ -1,4 +1,4 @@
-package cn.cyh.generatedata.strategy;
+package cn.cyh.generatedata.service;
 
 import org.springframework.util.StringUtils;
 

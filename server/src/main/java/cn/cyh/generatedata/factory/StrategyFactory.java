@@ -1,6 +1,8 @@
-package cn.cyh.generatedata.strategy;
+package cn.cyh.generatedata.factory;
 
 import cn.cyh.generatedata.api.enums.Rule;
+import cn.cyh.generatedata.api.enums.RuleFunc;
+import cn.cyh.generatedata.service.Strategy;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

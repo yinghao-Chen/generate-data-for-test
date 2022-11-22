@@ -1,6 +1,4 @@
-package cn.cyh.generatedata.strategy;
-
-import cn.cyh.generatedata.api.enums.Rule;
+package cn.cyh.generatedata.api.enums;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

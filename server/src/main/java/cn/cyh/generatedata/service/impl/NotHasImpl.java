@@ -1,8 +1,10 @@
-package cn.cyh.generatedata.strategy;
+package cn.cyh.generatedata.service.impl;
 
 import cn.cyh.generatedata.api.cache.DataCache;
 import cn.cyh.generatedata.api.enums.Method;
 import cn.cyh.generatedata.api.enums.Rule;
+import cn.cyh.generatedata.api.enums.RuleFunc;
+import cn.cyh.generatedata.service.Strategy;
 import cn.cyh.generatedata.utils.GenerateUtil;
 import cn.cyh.generatedata.utils.RandomStrUtil;
 import cn.cyh.generatedata.utils.SfzhUtil;

@@ -1,10 +1,12 @@
-package cn.cyh.generatedata.strategy;
+package cn.cyh.generatedata.service.impl;
 
 import cn.cyh.generatedata.api.enums.Rule;
+import cn.cyh.generatedata.api.enums.RuleFunc;
 import cn.cyh.generatedata.rereg.exception.RegexpIllegalException;
 import cn.cyh.generatedata.rereg.exception.TypeNotMatchException;
 import cn.cyh.generatedata.rereg.exception.UninitializedException;
 import cn.cyh.generatedata.rereg.model.OrdinaryNode;
+import cn.cyh.generatedata.service.Strategy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

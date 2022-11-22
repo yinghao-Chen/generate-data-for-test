@@ -2,8 +2,8 @@ package cn.cyh.generatedata.utils;
 
 import cn.cyh.generatedata.api.enums.Method;
 import cn.cyh.generatedata.api.enums.Rule;
-import cn.cyh.generatedata.strategy.Strategy;
-import cn.cyh.generatedata.strategy.StrategyFactory;
+import cn.cyh.generatedata.service.Strategy;
+import cn.cyh.generatedata.factory.StrategyFactory;
 import org.springframework.util.StringUtils;
 
 import java.util.HashSet;
