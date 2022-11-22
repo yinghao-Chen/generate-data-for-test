@@ -68,7 +68,10 @@ public class GenerateUtil {
     }
 
     public static int getNumRandom(int min, int max) {
-        return RANDOM.nextInt(max-min) + min + 1;
+        if (max == min) {
+            return min;
+        }
+        return RANDOM.nextInt(Math.abs(max-min)) + min + 1;
     }
 
     public static long getNumRandom(long min, long max) {

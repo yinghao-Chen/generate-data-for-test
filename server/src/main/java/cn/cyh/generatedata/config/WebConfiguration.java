@@ -19,12 +19,17 @@ public class WebConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
     }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedHeaders("*").allowedMethods("*").allowedOrigins("*");
+        registry.addMapping("/**")
+                .allowedOriginPatterns("*")
+                .allowedHeaders("*")
+                .allowedMethods("*")
+                .maxAge(18000L)
+                .allowCredentials(true);
     }
 
 }

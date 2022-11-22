@@ -1,3 +1,4 @@
+### service
 HELP.md
 /server/src/main/**/target/
 /server/src/test/**/target/
@@ -8,4 +9,11 @@ HELP.md
 /server/*.iws
 /server/*.iml
 /server/*.ipr
+
+### web
+/web/node_modules
+/web/dist
+
+/web/.vscode/*
+
 
