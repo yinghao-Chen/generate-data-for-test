@@ -22,6 +22,14 @@
       <pre class="pre-cls">{{ textarea2 }}</pre>
     </el-col>
   </el-row>
+
+  <el-row>
+    <el-col :span="22">
+    </el-col>
+    <el-col :span="2">
+      <el-button type="primary" @click="configDataSource">配置数据源</el-button>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
@@ -47,6 +55,11 @@ export default {
           this.textarea2 = res.data
         }
       }
+    },
+    configDataSource() {
+      this.$router.push({
+        path: "/dataSource"
+      })
     }
   }
 }

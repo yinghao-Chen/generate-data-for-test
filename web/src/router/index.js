@@ -7,6 +7,10 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: () => import('../views/Home.vue')
+    },{
+      path: '/dataSource',
+      name: 'dataSource',
+      component: () => import('../views/dataSource/index.vue')
     }
   ]
 })
