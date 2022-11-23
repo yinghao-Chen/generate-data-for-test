@@ -35,7 +35,7 @@
           />
         </el-form-item>
         <el-form-item>
-        <el-alert title="数据源中不存在的字段会忽略。" type="info" show-icon />
+        <el-alert title="tips：数据源中不存在的字段会忽略。" type="info" show-icon />
         <el-input
           v-model="ruleData"
           :autosize="{ minRows: 20, maxRows: 20 }"
@@ -44,6 +44,7 @@
         />
         </el-form-item>
         <el-form-item>
+          <el-button type="success" @click="test">test connection</el-button>
           <el-button type="primary" @click="onSubmit">Generate</el-button>
         </el-form-item>
       </el-form>
@@ -101,6 +102,28 @@ export default {
   methods: {
     back() {
       this.$router.go(-1)
+    },
+    async test() {
+      const { meta } = this
+      const _data = Object.assign({
+          url: '',
+          username: '',
+          password: ''
+        }, meta)
+      const res = await this.$api.toDataTest(_data)
+      if(res.code == 200) {
+        ElMessage({
+          showClose: true,
+          message: '连接成功',
+          type: 'success',
+        })
+      } else {
+        ElMessage({
+          showClose: true,
+          message: '连接失败',
+          type: 'error',
+        })
+      }
     },
     async onSubmit() {
       const { meta, ruleData, type } = this
