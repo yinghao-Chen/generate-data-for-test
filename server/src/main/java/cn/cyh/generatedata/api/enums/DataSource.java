@@ -10,7 +10,7 @@ public enum DataSource {
      */
     MYSQL("mysql"),
     ORACLE(""),
-    ELASTIC_SEARCH(""),
+    ELASTIC_SEARCH("es"),
     KAFKA(""),
     RABBIT_MQ("");
 

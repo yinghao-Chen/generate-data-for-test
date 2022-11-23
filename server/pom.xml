@@ -23,6 +23,8 @@
 		<reverse-regexp.version>1.0.4</reverse-regexp.version>
 		<snowflake.version>2.0.1</snowflake.version>
 		<mysql-connector.version>8.0.31</mysql-connector.version>
+		<okhttp.version>3.8.1</okhttp.version>
+		<fastjson.version>1.2.47</fastjson.version>
 	</properties>
 
 	<dependencies>
@@ -48,6 +50,16 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql-connector.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>${okhttp.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${fastjson.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -72,6 +84,16 @@
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
 				<version>${mysql-connector.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.squareup.okhttp3</groupId>
+				<artifactId>okhttp</artifactId>
+				<version>${okhttp.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>${fastjson.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

@@ -11,7 +11,10 @@ import java.io.Serializable;
 @Data
 public class GenToDataSourceVO implements Serializable {
 
-    /** 数据库地址 jdbc:mysql://127.0.0.1:3306/abc **/
+    /** 数据库地址
+     * jdbc:mysql://127.0.0.1:3306/abc
+     * 192.168.0.1
+     **/
     private String url;
     /** 数据库username **/
     private String username;
@@ -22,5 +25,7 @@ public class GenToDataSourceVO implements Serializable {
     private Integer count;
     /** 数据库 表/索引/topic/队列 **/
     private String table;
+    /** 索引类型 **/
+    private String type;
 
 }
