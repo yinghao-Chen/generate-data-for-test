@@ -7,11 +7,13 @@
   <el-row>
     <el-col :span="24">
       <div class="sel-form-label">选择一个数据源</div>
-      <el-select v-model="type" placeholder="Please select a datasource" class="sel-form-split">
+      <el-select v-model="type" placeholder="Please select a datasource" class="sel-form-split" @change="cahngeType">
         <el-option label="mysql" value="mysql" />
+        <el-option label="oracle" value="oracle" />
         <el-option label="elastic search" value="es" />
       </el-select>
     
+      <!--mysql-->
       <el-form :model="form" label-width="120px" v-if="type == 'mysql'">
         <el-form-item label="url">
           <el-input v-model="meta.url" placeholder="eg: jdbc:mysql://192.168.0.86:3306/test" />
@@ -48,6 +50,80 @@
           <el-button type="primary" @click="onSubmit">Generate</el-button>
         </el-form-item>
       </el-form>
+
+      <!--oracle-->
+      <el-form :model="form" label-width="120px" v-if="type == 'oracle'">
+        <el-form-item label="url">
+          <el-input v-model="meta.url" placeholder="eg: jdbc:oracle:thin:@127.0.0.1:1521:orcl" />
+        </el-form-item>
+        <el-form-item label="username">
+          <el-input v-model="meta.username" placeholder="Please input username" />
+        </el-form-item>
+        <el-form-item label="password">
+          <el-input v-model="meta.password" type="password" placeholder="Please input password" />
+        </el-form-item>
+        <el-form-item label="数据库表">
+          <el-input v-model="meta.table" placeholder="Please input table,like this: db:test" />
+        </el-form-item>
+        <el-form-item label="数据量">
+          <el-input-number
+            v-model="meta.count"
+            class="mx-4"
+            :min="1"
+            :max="1000000"
+            controls-position="right"
+          />
+        </el-form-item>
+        <el-form-item>
+        <el-alert title="tips：数据源中不存在的字段会忽略。" type="info" show-icon />
+        <el-input
+          v-model="ruleData"
+          :autosize="{ minRows: 20, maxRows: 20 }"
+          type="textarea"
+          :placeholder="ruleText"
+        />
+        </el-form-item>
+        <el-form-item>
+          <el-button type="success" @click="test">test connection</el-button>
+          <el-button type="primary" @click="onSubmit">Generate</el-button>
+        </el-form-item>
+      </el-form>
+
+      <!--es-->
+      <el-form :model="form" label-width="120px" v-if="type == 'es'">
+        <el-form-item label="url">
+          <el-input v-model="meta.url" placeholder="eg: 127.0.0.1" />
+        </el-form-item>
+        <el-form-item label="索引">
+          <el-input v-model="meta.table" placeholder="Please input index" />
+        </el-form-item>
+        <el-form-item label="类型">
+          <el-input v-model="meta.type" placeholder="Please input type" />
+        </el-form-item>
+        <el-form-item label="数据量">
+          <el-input-number
+            v-model="meta.count"
+            class="mx-4"
+            :min="1"
+            :max="1000000"
+            controls-position="right"
+          />
+        </el-form-item>
+        <el-form-item>
+        <el-alert title="tips：数据库中不存在的字段会忽略。" type="info" show-icon />
+        <el-input
+          v-model="ruleData"
+          :autosize="{ minRows: 20, maxRows: 20 }"
+          type="textarea"
+          :placeholder="ruleText"
+        />
+        </el-form-item>
+        <el-form-item>
+          <el-button type="success" @click="test">test connection</el-button>
+          <el-button type="primary" @click="onSubmit">Generate</el-button>
+        </el-form-item>
+      </el-form>
+      
     </el-col>
   </el-row>
 </template>
@@ -65,7 +141,8 @@ export default {
           username: '',
           password: '',
           table: '',
-          count: 1
+          type: '',
+          count: 100
         }),
         ruleData: ref(''),
         ruleText: ref('error')
@@ -90,27 +167,50 @@ export default {
       return match
     })
 
-    const _data = localStorage.getItem(`CACHE_${this.type}_DATA`)
-    if(_data) {
-      const data = JSON.parse(_data)
-      if(data.meta){
-        this.meta = data.meta
-      }
-      this.ruleData = _data.ruleData ? JSON.stringify(_data.ruleData) : ''
-    }
+    this.cahngeType()
   },
   methods: {
     back() {
       this.$router.go(-1)
     },
+    cahngeType() {
+      const _data = localStorage.getItem(`CACHE_${this.type}_DATA`)
+      if(_data) {
+        const data = JSON.parse(_data)
+        if(data.meta){
+          this.meta = data.meta
+        }
+        this.ruleData = _data.ruleData ? JSON.stringify(_data.ruleData) : ''
+      } else {
+        this.meta = {
+            url: '',
+            username: '',
+            password: '',
+            table: '',
+            type: '',
+            count: 100
+          }
+        this.ruleData = ''
+      }
+    },
     async test() {
-      const { meta } = this
-      const _data = Object.assign({
+      const { meta,type } = this
+      let res = {};
+      if(type == 'mysql') {
+        const _data = Object.assign({
           url: '',
           username: '',
           password: ''
         }, meta)
-      const res = await this.$api.toDataTest(_data)
+        res = await this.$api.toDataTest(_data)
+      } else if(type == 'oracle') {
+        
+      } else if(type == 'es') {
+        const _data = Object.assign({
+          url: ''
+        }, meta)
+        res = await this.$api.toDataTestEs(_data)
+      }
       if(res.code == 200) {
         ElMessage({
           showClose: true,
@@ -134,20 +234,35 @@ export default {
           username: '',
           password: '',
           table: '',
+          type: '',
           count: 1
         }, meta),
         ruleData: ruleData ? JSON.parse(ruleData) : ''
       }
       localStorage.setItem(`CACHE_${type}_DATA`, JSON.stringify(_data))
 
-      if(!meta.url || !meta.username || !meta.password || !meta.table) {
-        ElMessage({
-          showClose: true,
-          message: '请输入数据源信息',
-          type: 'warning',
-        })
-        return
+      if(type == 'mysql') {
+        if(!meta.url || !meta.username || !meta.password || !meta.table) {
+          ElMessage({
+            showClose: true,
+            message: '请输入数据源信息',
+            type: 'warning',
+          })
+          return
+        }
+      } else if(type == 'oracle') {
+
+      } else if(type == 'es') {
+        if(!meta.url || !meta.table || !meta.type) {
+          ElMessage({
+            showClose: true,
+            message: '请输入数据源信息',
+            type: 'warning',
+          })
+          return
+        }
       }
+
       if(!ruleData) {
         ElMessage({
           showClose: true,
@@ -157,7 +272,14 @@ export default {
         return
       }
 
-      const res = await this.$api.toDatasource(_data)
+      let res = {}
+      if(type == 'mysql') {
+        res = await this.$api.toDatasource(_data)
+      } else if(type == 'oracle') {
+
+      } else if(type == 'es') {
+        res = await this.$api.toDatasourceEs(_data)
+      }
       if(res.code == 200) {
         ElMessage({
           showClose: true,
