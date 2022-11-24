@@ -196,15 +196,13 @@ export default {
     async test() {
       const { meta,type } = this
       let res = {};
-      if(type == 'mysql') {
+      if(type == 'mysql' || type == 'oracle') {
         const _data = Object.assign({
           url: '',
           username: '',
           password: ''
         }, meta)
         res = await this.$api.toDataTest(_data)
-      } else if(type == 'oracle') {
-        
       } else if(type == 'es') {
         const _data = Object.assign({
           url: ''
@@ -241,7 +239,7 @@ export default {
       }
       localStorage.setItem(`CACHE_${type}_DATA`, JSON.stringify(_data))
 
-      if(type == 'mysql') {
+      if(type == 'mysql' || type == 'oracle') {
         if(!meta.url || !meta.username || !meta.password || !meta.table) {
           ElMessage({
             showClose: true,
@@ -250,8 +248,6 @@ export default {
           })
           return
         }
-      } else if(type == 'oracle') {
-
       } else if(type == 'es') {
         if(!meta.url || !meta.table || !meta.type) {
           ElMessage({
@@ -273,10 +269,8 @@ export default {
       }
 
       let res = {}
-      if(type == 'mysql') {
+      if(type == 'mysql' || type == 'oracle') {
         res = await this.$api.toDatasource(_data)
-      } else if(type == 'oracle') {
-
       } else if(type == 'es') {
         res = await this.$api.toDatasourceEs(_data)
       }

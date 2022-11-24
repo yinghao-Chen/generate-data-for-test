@@ -8,14 +8,14 @@ export const generate = (data) => {
     data
   });
 }
-// 测试数据源-mysql
+// 测试数据源-mysql、oracle
 export const toDataTest = (data) => {
   return request("/toData/test", {
     method: "POST",
     data
   });
 }
-// 生成数据到数据源-mysql
+// 生成数据到数据源-mysql、oracle
 export const toDatasource = (data) => {
   return request("/toData/save", {
     method: "POST",
