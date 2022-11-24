@@ -9,7 +9,7 @@ public enum DataSource {
      * 定义支持的数据源
      */
     MYSQL("mysql"),
-    ORACLE(""),
+    ORACLE("oracle"),
     ELASTIC_SEARCH("es"),
     KAFKA(""),
     RABBIT_MQ("");

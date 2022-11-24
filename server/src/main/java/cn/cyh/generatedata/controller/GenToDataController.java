@@ -26,7 +26,9 @@ public class GenToDataController {
 
     @PostMapping("/test")
     public Result test(@RequestBody GenToDataSourceVO vo) {
-        if(!StringUtils.hasText(vo.getUrl()) || !StringUtils.hasText(vo.getUsername())) {
+        if(!StringUtils.hasText(vo.getUrl())
+                || !StringUtils.hasText(vo.getUsername())
+                || !StringUtils.hasText(vo.getPassword())) {
             return Result.fail(ResultCode.FAILURE, "缺少必要参数");
         }
         DataSourceStrategy strategy = getStrategy(vo.getUrl());
@@ -46,6 +48,9 @@ public class GenToDataController {
                 || !StringUtils.hasText(vo.getMeta().getTable())
                 || vo.getMeta().getCount() <= 0) {
             return Result.fail(ResultCode.FAILURE, "缺少必要参数");
+        }
+        if(vo.getMeta().getUrl().contains(DataSource.ORACLE.getValue()) && !vo.getMeta().getTable().contains(":")) {
+            return Result.fail(ResultCode.FAILURE, "数据库表错误");
         }
         DataSourceStrategy strategy = getStrategy(vo.getMeta().getUrl());
         if(strategy != null) {
@@ -89,6 +94,8 @@ public class GenToDataController {
         DataSourceStrategy strategy = null;
         if(url.contains(DataSource.MYSQL.getValue())) {
             strategy = DataSourceStrategyFactory.getStrategy(DataSource.MYSQL);
+        } else if(url.contains(DataSource.ORACLE.getValue())) {
+            strategy = DataSourceStrategyFactory.getStrategy(DataSource.ORACLE);
         } else if(IpUtil.validIp(url)) {
             strategy = DataSourceStrategyFactory.getStrategy(DataSource.ELASTIC_SEARCH);
         }
