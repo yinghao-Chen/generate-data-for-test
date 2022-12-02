@@ -19,7 +19,7 @@ public class WebConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
     }
 
     @Override
@@ -28,8 +28,7 @@ public class WebConfiguration implements WebMvcConfigurer {
                 .allowedOriginPatterns("*")
                 .allowedHeaders("*")
                 .allowedMethods("*")
-                .maxAge(18000L)
-                .allowCredentials(true);
+                .maxAge(18000L);
     }
 
 }
