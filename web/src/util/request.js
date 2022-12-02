@@ -1,11 +1,8 @@
 import axios from "axios";
 
-
 // 创建 axios 实例
 const service = axios.create({
     timeout: 60000, // 请求超时时间
-    baseURL: baseURL,
-    // withCredentials: true
 });
 
 const err = (error) => {
